@@ -1,7 +1,4 @@
 // "use client";
-// import { useRouter } from "next/navigation";
-// import { useRouter } from "next/router"
-// import { notFound, useParams } from "next/navigation";
 import TwitterLayout from "@/components/FeedCard/Layout/TwitterLayout";
 import type { GetServerSideProps, NextPage } from "next";
 import { FaArrowLeft } from "react-icons/fa6";
@@ -13,8 +10,8 @@ import { graphqlClient } from "@/clients/api";
 import { getUserByIdQuery } from "@/graphql/query/user";
 import { useCallback, useMemo } from "react";
 import { followUserMutation, unfollowUserMutation } from "@/graphql/mutation/user";
-import { useQueries, useQueryClient } from "@tanstack/react-query";
-// import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+
 
 interface ServerProps{
     userInfo?: User,

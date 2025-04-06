@@ -34,7 +34,7 @@ interface TwitterSidebarButton{
 
 const TwitterLayout: React.FC<TwitterLayoutProps> =(props) => {
     const {user}=userCurrentUser()
-    const {tweets = []}=useGetAllTweets()
+    // const {tweets = []}=useGetAllTweets()
 
     const sideBarMenuItems: TwitterSidebarButton[] = useMemo(
         () => [
@@ -80,8 +80,8 @@ const TwitterLayout: React.FC<TwitterLayoutProps> =(props) => {
           [user?.id]
         );
 
-      const {mutate}=useCreateTweet()
-      const [content,setContent]=useState('')
+      // const {mutate}=useCreateTweet()
+      // const [content,setContent]=useState('')
       const queryClient=useQueryClient()
       const handelLoginWithGoogle=useCallback(async(cred:CredentialResponse)=>{
         console.log('ahc ')

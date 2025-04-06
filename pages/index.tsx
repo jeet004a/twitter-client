@@ -12,19 +12,19 @@ import { CiImageOn } from "react-icons/ci";
 import FeedCard from "@/components/FeedCard";
 import toast from "react-hot-toast";
 import { GetServerSideProps } from "next";
-import { Tweet, User } from "@/gpl/graphql";
+import { Tweet } from "@/gpl/graphql";
 import { getAllTweetsQuery, getSignedURLForTweetQuery } from "@/graphql/query/tweet";
 import axios from "axios";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 interface HomeProps{
   tweets?: Tweet[]
@@ -67,25 +67,25 @@ export default function Home(props: HomeProps) {
   const [imageURL,setImageURL]=useState('')
 
   const queryClient=useQueryClient()
-  const handelLoginWithGoogle=useCallback(async(cred:CredentialResponse)=>{
-    console.log('ahc ')
-    const googleToken=cred.credential
+  // const handelLoginWithGoogle=useCallback(async(cred:CredentialResponse)=>{
+  //   console.log('ahc ')
+  //   const googleToken=cred.credential
 
-    if(!googleToken){
-      return toast.error(`Google token not found`)
-    }
+  //   if(!googleToken){
+  //     return toast.error(`Google token not found`)
+  //   }
 
-    const {verifyGoogleToken}=await  graphqlClient.request(verifyUserGoogleTokenQuery,{
-      token: googleToken
-    })
+  //   const {verifyGoogleToken}=await  graphqlClient.request(verifyUserGoogleTokenQuery,{
+  //     token: googleToken
+  //   })
 
-    toast.success("Verified Success")
-    console.log('xyz',verifyGoogleToken)
-    if(verifyGoogleToken){
-      window.localStorage.setItem('__twitter_token',verifyGoogleToken)
-    }
-    await queryClient.invalidateQueries({ queryKey: ['current-user'] });
-  },[queryClient])
+  //   toast.success("Verified Success")
+  //   console.log('xyz',verifyGoogleToken)
+  //   if(verifyGoogleToken){
+  //     window.localStorage.setItem('__twitter_token',verifyGoogleToken)
+  //   }
+  //   await queryClient.invalidateQueries({ queryKey: ['current-user'] });
+  // },[queryClient])
 
   //Below Handel the image input
   const handleInputChangeFile=useCallback((input: HTMLInputElement)=>{
@@ -176,17 +176,17 @@ export default function Home(props: HomeProps) {
 
 
 
-type TweetResponse = {
-  id: string;
-  content: string;
-  imageURL?: string;
-  author: {
-      id: string;
-      firstName: string;
-      lastName: string;
-      profileImageURL?: string;
-  };
-};
+// type TweetResponse = {
+//   id: string;
+//   content: string;
+//   imageURL?: string;
+//   author: {
+//       id: string;
+//       firstName: string;
+//       lastName: string;
+//       profileImageURL?: string;
+//   };
+// };
 
 type GetAllTweetsResponse = {
   getAllTweets: Tweet[];
@@ -197,7 +197,7 @@ type GetAllTweetsResponse = {
 // }
 
 
-export const getServerSideProps:GetServerSideProps<HomeProps>=async(context)=>{
+export const getServerSideProps:GetServerSideProps<HomeProps>=async()=>{
   const allTweets=await graphqlClient.request<GetAllTweetsResponse>(getAllTweetsQuery)
 
   return {
